@@ -3,7 +3,11 @@ const { Schema, model } = require('mongoose');
 const PostSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'user'
+  },
+  draw: {
+    type: String,
+    // required: true
   },
   text: {
     type: String,
@@ -13,7 +17,7 @@ const PostSchema = new Schema({
     {
       user: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'user'
       }
     }
   ],
@@ -23,4 +27,4 @@ const PostSchema = new Schema({
   }
 });
 
-module.exports = model('Post', PostSchema);
+module.exports = model('post', PostSchema);

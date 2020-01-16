@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose');
 const ProfileSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'user'
   },
   avatar: {
     type: String
@@ -23,4 +23,4 @@ const ProfileSchema = new Schema({
   }
 });
 
-module.exports = model('Profile', ProfileSchema);
+module.exports = model('profile', ProfileSchema);
