@@ -3,9 +3,9 @@ import React, { Component } from "react";
 class Navigation extends Component {
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <a className="navbar-brand" href="!#">
-          Navbar
+          Pencil Symphony
         </a>
         <button
           className="navbar-toggler"
@@ -23,7 +23,7 @@ class Navigation extends Component {
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <a className="nav-link" href="!#">
-                Home <span className="sr-only">(current)</span>
+                Home
               </a>
             </li>
             <li className="nav-item">
@@ -55,16 +55,6 @@ class Navigation extends Component {
                   Something else here
                 </a>
               </div>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link disabled"
-                href="!#"
-                tabindex="-1"
-                aria-disabled="true"
-              >
-                Disabled
-              </a>
             </li>
           </ul>
           <form className="form-inline my-2 my-lg-0">
