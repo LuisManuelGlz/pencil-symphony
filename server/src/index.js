@@ -24,9 +24,10 @@ app.use(express.json());
 app.use('/public', express.static(path.resolve(__dirname, 'public')));
 
 // rutas
+app.use('/api/users', require('./routes/usersRoutes'));
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/profile', require('./routes/profileRoutes'));
-app.use('/api/post', require('./routes/postRoutes'));
+app.use('/api/posts', require('./routes/postsRoutes'));
 
 // escuchando el servidor
 app.listen(app.get('port'), () => {
