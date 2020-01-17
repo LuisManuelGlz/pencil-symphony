@@ -55,7 +55,9 @@ UsersController.signup = async (req, res) => {
 };
 
 /**
- *
+ * @route PUT /apu/users/change-password
+ * @description Change password by ID
+ * @access private
  */
 UsersController.changePassword = async (req, res) => {
   const errors = validationResult(req);
