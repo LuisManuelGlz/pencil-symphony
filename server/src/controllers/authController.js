@@ -25,7 +25,7 @@ AuthController.login = async (req, res) => {
 
   if (!user) {
     return res.status(404).json({
-      errors: [{ msg: "Email doesn't exist, please verify your email" }]
+      errors: [{ msg: 'Email doesn\'t exist, please verify your email' }]
     });
   }
 

@@ -1,28 +1,20 @@
 import axios from 'axios';
-import { SIGNUP_SUCCESS, SIGNUP_FAIL } from './types';
+import { setAlert } from './alert';
+import { SIGNUP_SUCCESS, SIGNUP_FAIL, LOGIN_LOADED } from './actionTypes';
 
-export const register = ({
-  firstName,
-  lastName,
-  email,
-  password,
-  password2
-}) => dispatch => {
+export const signup = user => async dispatch => {
   axios.defaults.headers.common['Content-Type'] = 'application/json';
 
-  const body = {
-    firstName,
-    lastName,
-    email,
-    password,
-    password2
-  };
-
   try {
-    const res = axios.post('/api/users/signup', body);
-
+    const res = await axios.post('/api/users/signup', user);
     dispatch({ type: SIGNUP_SUCCESS, payload: res.data });
   } catch (error) {
-    
+    const messages = error.response.data;
+    dispatch(setAlert(messages));
+    dispatch({ type: SIGNUP_FAIL });
   }
+};
+
+export const cancelRedirect = () => dispatch => {
+  dispatch({ type: LOGIN_LOADED, payload: false });
 };

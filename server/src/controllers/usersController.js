@@ -24,7 +24,7 @@ UsersController.signup = async (req, res) => {
   if (password !== password2) {
     return res
       .status(409)
-      .json({ errors: [{ msg: "Passwords does't match" }] });
+      .json({ errors: [{ msg: 'Passwords does\'t match' }] });
   }
 
   const userEmail = await User.findOne({ email });
@@ -81,7 +81,7 @@ UsersController.changePassword = async (req, res) => {
     if (newPassword !== newPassword2) {
       return res
         .status(409)
-        .json({ errors: [{ msg: "Passwords does't match" }] });
+        .json({ errors: [{ msg: 'Passwords does\'t match' }] });
     }
 
     newPassword = await user.encryptPassword(newPassword);
