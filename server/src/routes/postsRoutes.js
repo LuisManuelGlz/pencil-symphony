@@ -4,15 +4,15 @@ const router = express.Router();
 
 const { isAuthenticated } = require('../helpers/auth');
 
-const postController = require('../controllers/postsController');
+const postsController = require('../controllers/postsController');
 
-router.get('/', isAuthenticated, postController.getPosts);
-router.get('/:id', isAuthenticated, postController.getPost);
+router.get('/', isAuthenticated, postsController.getPosts);
+router.get('/:id', isAuthenticated, postsController.getPost);
 router.post(
   '/add',
   [isAuthenticated, [check('text', 'Please write something').notEmpty()]],
-  postController.addPost
+  postsController.addPost
 );
-router.delete('/delete/:id', isAuthenticated, postController.deletePost);
+router.delete('/delete/:id', isAuthenticated, postsController.deletePost);
 
 module.exports = router;

@@ -2,14 +2,14 @@ const { validationResult } = require('express-validator');
 
 const Post = require('../models/Post');
 
-const PostController = {};
+const PostsController = {};
 
 /**
  * @route GET api/posts
  * @description Get all posts
  * @access private
  */
-PostController.getPosts = async (req, res) => {
+PostsController.getPosts = async (req, res) => {
   try {
     const posts = await Post.find({}).populate('user', ['firstName', 'avatar']);
     return res.status(200).json(posts);
@@ -24,7 +24,7 @@ PostController.getPosts = async (req, res) => {
  * @description Get posts by ID
  * @access private
  */
-PostController.getPost = async (req, res) => {
+PostsController.getPost = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -49,7 +49,7 @@ PostController.getPost = async (req, res) => {
  * @description Create a post
  * @access private
  */
-PostController.addPost = async (req, res) => {
+PostsController.addPost = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -76,7 +76,7 @@ PostController.addPost = async (req, res) => {
  * @description Delete a post by ID
  * @access private
  */
-PostController.deletePost = async (req, res) => {
+PostsController.deletePost = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -88,4 +88,4 @@ PostController.deletePost = async (req, res) => {
   }
 };
 
-module.exports = PostController;
+module.exports = PostsController;

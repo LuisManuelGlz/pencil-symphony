@@ -2,7 +2,8 @@ const express = require('express');
 const { check } = require('express-validator');
 const router = express();
 
-const userController = require('../controllers/usersController');
+const usersController = require('../controllers/usersController');
+const { isAuthenticated } = require('../helpers/auth');
 
 router.post(
   '/signup',
@@ -15,7 +16,23 @@ router.post(
       'Please enter a password with 4 or more characters'
     ).isLength({ min: 4 })
   ],
-  userController.signup
+  usersController.signup
+);
+
+router.put(
+  '/change-password/:id',
+  [
+    isAuthenticated,
+    check(
+      'oldPassword',
+      'Please enter your old password'
+    ).notEmpty(),
+    check(
+      'newPassword',
+      'Please enter your new password with 4 or more characters'
+    ).isLength({ min: 4 })
+  ],
+  usersController.changePassword
 );
 
 module.exports = router;

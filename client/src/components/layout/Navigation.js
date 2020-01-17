@@ -1,12 +1,13 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 
 class Navigation extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a className="navbar-brand" href="!#">
+        <Link to="/" className="navbar-brand">
           Pencil Symphony
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -22,14 +23,14 @@ class Navigation extends Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="!#">
+              <Link to="/" className="nav-link" href="!#">
                 Home
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="!#">
-                Link
-              </a>
+              <Link to="/posts" className="nav-link" href="!#">
+                Posts
+              </Link>
             </li>
             <li className="nav-item dropdown">
               <a
@@ -44,16 +45,16 @@ class Navigation extends Component {
                 Dropdown
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="!#">
-                  Action
-                </a>
-                <a className="dropdown-item" href="!#">
-                  Another action
-                </a>
+                <Link to="/profile" className="dropdown-item">
+                  Profile
+                </Link>
+                <Link to="/acount" className="dropdown-item">
+                  Acount
+                </Link>
                 <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="!#">
-                  Something else here
-                </a>
+                <button className="dropdown-item">
+                  Logout
+                </button>
               </div>
             </li>
           </ul>
