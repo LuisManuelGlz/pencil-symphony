@@ -48,52 +48,65 @@ class Signup extends Component {
     }
 
     return (
-      <div>
-        Signup
+      <div className="d-flex justify-content-center">
         <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            className=""
-            name="firstName"
-            value={this.state.firstName}
-            placeholder="First name"
-            onChange={this.handleChange}
-          />
-          <input
-            type="text"
-            className=""
-            name="lastName"
-            value={this.state.lastName}
-            placeholder="Last name"
-            onChange={this.handleChange}
-          />
-          <input
-            type="email"
-            className=""
-            name="email"
-            value={this.state.email}
-            placeholder="Email"
-            onChange={this.handleChange}
-          />
-          <input
-            type="password"
-            className=""
-            name="password"
-            value={this.state.password}
-            placeholder="Password"
-            onChange={this.handleChange}
-          />
-          <input
-            type="password"
-            className=""
-            name="password2"
-            value={this.state.password2}
-            placeholder="Confirm password"
-            onChange={this.handleChange}
-          />
-          <button type="submit">Signup</button>
+          <h2 className="text-center">Sign Up</h2>
+          <hr />
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              name="firstName"
+              value={this.state.firstName}
+              placeholder="First name"
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              name="lastName"
+              value={this.state.lastName}
+              placeholder="Last name"
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="email"
+              className="form-control"
+              name="email"
+              value={this.state.email}
+              placeholder="Email"
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              className="form-control"
+              name="password"
+              value={this.state.password}
+              placeholder="Password"
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              className="form-control"
+              name="password2"
+              value={this.state.password2}
+              placeholder="Confirm password"
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="form-group text-center">
+            <button type="submit" className="btn btn-primary mr-2">Sign Up</button>
+            <Link to="/login" className="btn">I already have an account</Link>
+          </div>
         </form>
-        <Link to="/login">Login</Link>
       </div>
     );
   }

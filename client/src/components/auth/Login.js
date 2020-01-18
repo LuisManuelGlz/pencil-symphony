@@ -38,28 +38,35 @@ class Login extends Component {
     }
 
     return (
-      <div>
-        Login
+      <div className="d-flex justify-content-center">
         <form onSubmit={this.handleSubmit}>
-          <input
-            type="email"
-            className=""
-            name="email"
-            value={this.state.email}
-            placeholder="Email"
-            onChange={this.handleChange}
-          />
-          <input
-            type="password"
-            className=""
-            name="password"
-            value={this.state.password}
-            placeholder="Pasword"
-            onChange={this.handleChange}
-          />
-          <button type="submit">Login</button>
+          <h2 className="text-center">Log In</h2>
+          <hr />
+          <div className="form-group">
+            <input
+              type="email"
+              className="form-control"
+              name="email"
+              value={this.state.email}
+              placeholder="Email"
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              className="form-control"
+              name="password"
+              value={this.state.password}
+              placeholder="Pasword"
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="form-group text-center">
+            <button type="submit" className="btn btn-primary">Log In</button>
+            <Link to="/signup" className="btn">Create acount</Link>
+          </div>
         </form>
-        <Link to="/signup">Signup</Link>
       </div>
     );
   }

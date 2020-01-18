@@ -12,8 +12,14 @@ const secret = process.env.SECRET;
  * @description Test if user is authenticated
  * @access private
  */
-AuthController.testAuth = (req, res) => {
-  return res.status(200).json({ isAuthenticated: true });
+AuthController.testAuth = async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).select('-password');
+    return res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ errors: [{ msg: 'Server error' }] });
+  }
 };
 
 /**
@@ -27,30 +33,35 @@ AuthController.login = async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-
+  
   let { email, password } = req.body;
-
+  
   const user = await User.findOne({ email });
-
+  
   if (!user) {
     return res.status(404).json({
       errors: [{ msg: "Email doesn't exist, please verify your email" }]
     });
   }
-
+  
   const match = await user.validatePassword(password);
-
+  
   if (!match) {
     return res.status(401).json({ errors: [{ msg: 'Incorrect password' }] });
   }
-
+  
   const token = jwt.sign({ id: user._id, firstName: user.firstName }, secret, {
     expiresIn: 60 * 60 * 24
   });
-
-  await User.findByIdAndUpdate(user._id, { lastActive: new Date() });
-
-  return res.status(200).json({ token });
+  
+  try {
+    await User.findByIdAndUpdate(user._id, { lastActive: new Date() });
+    user.password = undefined;
+    return res.status(200).json({ token, user });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ errors: [{ msg: 'Server error' }] });
+  }
 };
 
 module.exports = AuthController;

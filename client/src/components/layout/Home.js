@@ -10,9 +10,9 @@ class Home extends Component {
     }
 
     return (
-      <div>
-        <Link to='/signup'>Signup</Link>
-        <Link to='/login'>Login</Link>
+      <div className="text-center">
+        <h2>Welcome to Pencil Symphony</h2>
+        <Link to='/login' className="btn">Log In</Link>
       </div>
     );
   }

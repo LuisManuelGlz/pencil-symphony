@@ -18,7 +18,9 @@ class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <Navation />
-          <Routes />
+          <div className="container mt-5">
+            <Routes />
+          </div>
         </BrowserRouter>
       </Provider>
     );
