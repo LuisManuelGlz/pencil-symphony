@@ -1,10 +1,10 @@
-import { USER_LOADED, LOGIN_SUCCESS, LOGIN_FAIL } from '../actions/actionTypes';
+import { USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from '../actions/actionTypes';
 
 const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: null,
   isLoading: true,
-  user: null
+  // user: null
 };
 
 export default function(state = initialState, action) {
@@ -14,19 +14,20 @@ export default function(state = initialState, action) {
     case USER_LOADED:
       return {
         ...state,
-        isAuthenticated: true,
-        isLoading: false,
-        user: payload
+        ...payload, // token: payload.token,
+        isLoading: false
       };
     case LOGIN_SUCCESS:
       localStorage.setItem('token', payload.token);
       return {
         ...state,
-        ...payload,
+        ...payload, // token: payload.token,
         isAuthenticated: true,
         isLoading: false,
       };
     case LOGIN_FAIL:
+    case AUTH_ERROR:
+    case LOGOUT:
       localStorage.removeItem('token');
       return {
         token: null,

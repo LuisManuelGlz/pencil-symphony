@@ -7,7 +7,7 @@ export const signup = user => async dispatch => {
 
   try {
     const res = await axios.post('/api/users/signup', user);
-    dispatch({ type: SIGNUP_SUCCESS, payload: res.data });
+    dispatch({ type: SIGNUP_SUCCESS });
   } catch (error) {
     const messages = error.response.data;
     dispatch(setAlert(messages));

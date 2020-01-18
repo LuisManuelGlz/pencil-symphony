@@ -1,4 +1,8 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+
+import { connect } from 'react-redux';
+import { logout } from '../../redux/actions/auth';
+
 import { Link } from 'react-router-dom';
 
 class Navigation extends Component {
@@ -52,9 +56,7 @@ class Navigation extends Component {
                   Acount
                 </Link>
                 <div className="dropdown-divider"></div>
-                <button className="dropdown-item">
-                  Logout
-                </button>
+                <button className="dropdown-item" onClick={this.props.logout}>Logout</button>
               </div>
             </li>
           </ul>
@@ -78,4 +80,4 @@ class Navigation extends Component {
   }
 }
 
-export default Navigation;
+export default connect(null, { logout })(Navigation);

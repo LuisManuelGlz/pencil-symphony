@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+
+import { connect } from 'react-redux';
 
 class Home extends Component {
   render() {
+    if (this.props.isAuthenticated) {
+      return <Redirect to="/posts" />
+    }
+
     return (
       <div>
         <Link to='/signup'>Signup</Link>
@@ -12,4 +18,8 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps)(Home);

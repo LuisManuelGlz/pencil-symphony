@@ -44,7 +44,7 @@ UsersController.signup = async (req, res) => {
       const newProfile = new Profile({ user: newUser._id });
       await newProfile.save();
 
-      return res.status(201).json({
+      return res.status(200).json({
         success: 'You have been successfully registered, you can now login'
       });
     })

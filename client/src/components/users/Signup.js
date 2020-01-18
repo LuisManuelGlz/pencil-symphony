@@ -43,6 +43,10 @@ class Signup extends Component {
       return <Redirect to="/login" />;
     }
 
+    if (this.props.isAuthenticated) {
+      return <Redirect to="/posts" />
+    }
+
     return (
       <div>
         Signup
@@ -96,7 +100,8 @@ class Signup extends Component {
 }
 
 const mapStateToProps = state => ({
-  toLogin: state.users.toLogin
+  toLogin: state.users.toLogin,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, { signup, cancelRedirect })(Signup);

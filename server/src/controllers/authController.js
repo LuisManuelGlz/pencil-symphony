@@ -8,6 +8,15 @@ const AuthController = {};
 const secret = process.env.SECRET;
 
 /**
+ * @route GET api/auth/test-auth
+ * @description Test if user is authenticated
+ * @access private
+ */
+AuthController.testAuth = (req, res) => {
+  return res.status(200).json({ isAuthenticated: true });
+};
+
+/**
  * @route POST api/auth/login
  * @description Login
  * @access public
@@ -25,7 +34,7 @@ AuthController.login = async (req, res) => {
 
   if (!user) {
     return res.status(404).json({
-      errors: [{ msg: 'Email doesn\'t exist, please verify your email' }]
+      errors: [{ msg: "Email doesn't exist, please verify your email" }]
     });
   }
 
@@ -41,7 +50,7 @@ AuthController.login = async (req, res) => {
 
   await User.findByIdAndUpdate(user._id, { lastActive: new Date() });
 
-  return res.status(201).json({ token });
+  return res.status(200).json({ token });
 };
 
 module.exports = AuthController;
