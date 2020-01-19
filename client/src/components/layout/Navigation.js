@@ -63,7 +63,7 @@ class Navigation extends Component {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        <i class="fa fa-user mr-1"></i>
+                        <i className="fa fa-user mr-1"></i>
                         {this.props.user.firstName}
                       </a>
                       <div
@@ -81,7 +81,8 @@ class Navigation extends Component {
                           className="dropdown-item"
                           onClick={this.props.logout}
                         >
-                          Logout
+                          <i className="fa fa-sign-out-alt mr-1"></i>
+                          Log Out
                         </button>
                       </div>
                     </li>

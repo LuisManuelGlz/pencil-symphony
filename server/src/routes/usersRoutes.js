@@ -20,17 +20,29 @@ router.post(
 );
 
 router.put(
-  '/change-password/:id',
+  '/update-acount',
   [
     isAuthenticated,
-    check(
-      'oldPassword',
-      'Please enter your old password'
-    ).notEmpty(),
-    check(
-      'newPassword',
-      'Please enter your new password with 4 or more characters'
-    ).isLength({ min: 4 })
+    [
+      check('newFirstName', 'Please write your first name').notEmpty(),
+      check('newLastName', 'Please write your last name').notEmpty(),
+      check('newEmail', 'Please write a valid email').isEmail()
+    ]
+  ],
+  usersController.updateAcount
+);
+
+router.put(
+  '/change-password',
+  [
+    isAuthenticated,
+    [
+      check('oldPassword', 'Please enter your old password').notEmpty(),
+      check(
+        'newPassword',
+        'Please enter your new password with 4 or more characters'
+      ).isLength({ min: 4 })
+    ]
   ],
   usersController.changePassword
 );

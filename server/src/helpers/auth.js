@@ -15,6 +15,7 @@ helpers.isAuthenticated = async (req, res, next) => {
         token = token.split(' ')[1];
         const decoded = await jwt.verify(token, secret);
         req.userId = decoded.id;
+        req.userEmail = decoded.email;
         next();
     } catch (error) {
         return res.status(401).json({ errors: [{ msg: 'Failed authentication' }] });
