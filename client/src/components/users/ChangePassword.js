@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+import { changePassword } from '../../redux/actions/users';
+
 class ChangePassword extends Component {
   constructor(props) {
     super(props);
@@ -10,6 +13,25 @@ class ChangePassword extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const passwordData = {
+      oldPassword: this.state.oldPassword,
+      newPassword: this.state.newPassword,
+      newPassword2: this.state.newPassword2
+    };
+
+    this.props.changePassword(passwordData);
+
+    this.setState({
+      oldPassword: '',
+      newPassword: '',
+      newPassword2: ''
+    });
   }
 
   handleChange(e) {
@@ -22,7 +44,7 @@ class ChangePassword extends Component {
       <div>
         <h2>Change your password</h2>
         <hr />
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <input
               type="password"
@@ -64,4 +86,4 @@ class ChangePassword extends Component {
   }
 }
 
-export default ChangePassword;
+export default connect(null, { changePassword })(ChangePassword);

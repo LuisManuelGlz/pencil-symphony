@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from 'react';
 
+import { connect } from 'react-redux';
+import { updateAccount } from '../../redux/actions/users';
+
 class UpdateAccount extends Component {
   constructor(props) {
     super(props);
@@ -11,11 +14,32 @@ class UpdateAccount extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
     const { name, value } = e.target;
     this.setState({ [name]: value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const user = {
+      newFirstName: this.state.newFirstName,
+      newLastName: this.state.newLastName,
+      newEmail: this.state.newEmail
+    };
+
+    this.props.updateAccount(user);
+
+    // if alert === 'success'
+    this.setState({
+      updateAccountMode: false,
+      newFirstName: '',
+      newLastName: '',
+      newEmail: ''
+    });
   }
 
   render() {
@@ -24,7 +48,7 @@ class UpdateAccount extends Component {
         <h2>Account settings</h2>
         <br />
         {this.state.updateAccountMode ? (
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <h5>Update account</h5>
             <hr />
             <div className="form-group">
@@ -85,4 +109,4 @@ class UpdateAccount extends Component {
   }
 }
 
-export default UpdateAccount;
+export default connect(null, { updateAccount })(UpdateAccount);
