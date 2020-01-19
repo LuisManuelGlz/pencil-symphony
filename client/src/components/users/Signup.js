@@ -98,7 +98,7 @@ class Signup extends Component {
               className="form-control"
               name="password2"
               value={this.state.password2}
-              placeholder="Confirm password"
+              placeholder="Confirm your password"
               onChange={this.handleChange}
             />
           </div>

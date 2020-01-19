@@ -20,7 +20,7 @@ router.post(
 );
 
 router.put(
-  '/update-acount',
+  '/update-account',
   [
     isAuthenticated,
     [
@@ -29,7 +29,7 @@ router.put(
       check('newEmail', 'Please write a valid email').isEmail()
     ]
   ],
-  usersController.updateAcount
+  usersController.updateAccount
 );
 
 router.put(

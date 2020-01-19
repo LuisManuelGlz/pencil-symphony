@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-
-import { connect } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
 
 import Home from '../layout/Home';
 import Signup from '../users/Signup';
 import Login from '../auth/Login';
 import Posts from '../posts/Posts';
 import Post from '../posts/Post';
-import Acount from '../users/Acount';
+import Account from '../users/Account';
 import Profile from '../profile/Profile';
 import EditProfile from '../profile/EditProfile';
 import PrivateRoute from './PrivateRoute'
@@ -23,7 +21,7 @@ class Routes extends Component {
         <Route exact path="/login" component={Login} />
         <PrivateRoute exact path="/posts" component={Posts} />
         <PrivateRoute exact path="/posts/:id" component={Post} />
-        <PrivateRoute exact path="/acount" component={Acount} />
+        <PrivateRoute exact path="/account" component={Account} />
         <PrivateRoute exact path="/profile" component={Profile} />
         <PrivateRoute exact path="/edit-profile" component={EditProfile} />
         <Route component={NotFound} />
@@ -32,9 +30,4 @@ class Routes extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  isLoading: state.auth.isLoading
-});
-
-export default connect(mapStateToProps)(Routes);
+export default Routes;

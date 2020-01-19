@@ -6,7 +6,7 @@ export const signup = user => async dispatch => {
   axios.defaults.headers.common['Content-Type'] = 'application/json';
 
   try {
-    const res = await axios.post('/api/users/signup', user);
+    await axios.post('/api/users/signup', user);
     dispatch({ type: SIGNUP_SUCCESS });
   } catch (error) {
     const messages = error.response.data;

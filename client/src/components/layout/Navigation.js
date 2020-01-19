@@ -73,8 +73,8 @@ class Navigation extends Component {
                         <Link to="/profile" className="dropdown-item">
                           Profile
                         </Link>
-                        <Link to="/acount" className="dropdown-item">
-                          Acount
+                        <Link to="/account" className="dropdown-item">
+                          Account
                         </Link>
                         <div className="dropdown-divider"></div>
                         <button

@@ -60,11 +60,11 @@ UsersController.signup = async (req, res) => {
 };
 
 /**
- * @route PUT /api/users/update-acount
+ * @route PUT /api/users/update-account
  * @description Change first name, last name and email
  * @access private
  */
-UsersController.updateAcount = async (req, res) => {
+UsersController.updateAccount = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -97,7 +97,7 @@ UsersController.updateAcount = async (req, res) => {
       email: newEmail
     });
     return res.status(200).json({
-      success: 'Your acount has been updated successfully'
+      success: 'Your account has been updated successfully'
     });
   } catch (error) {
     console.log(error);
