@@ -32,11 +32,11 @@ export const cancelRedirect = () => dispatch => {
 };
 
 export const updateAccount = user => async dispatch => {
+  axios.defaults.headers.common['Content-Type'] = 'application/json';
+  
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
-
-  axios.defaults.headers.common['Content-Type'] = 'application/json';
 
   try {
     const res = await axios.put('/api/users/update-account', user);
@@ -51,18 +51,15 @@ export const updateAccount = user => async dispatch => {
 };
 
 export const changePassword = passwordData => async dispatch => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
-  }
-
   axios.defaults.headers.common['Content-Type'] = 'application/json';
 
   try {
     const res = await axios.put('/api/users/change-password', passwordData);
-    console.log(res);
+    dispatch(setAlert(res.data.success, 'success'));
+    dispatch({ type: CHANGE_PASSWORD });
   } catch (error) {
-    const messages = error.response.data.errors;
-    dispatch(setAlert(messages));
+    const errors = error.response.data.errors;
+    errors.map(error => dispatch(setAlert(error.msg, 'danger')));
     dispatch({ type: CHANGE_PASSWORD_FAIL });
   }
 };

@@ -4,6 +4,7 @@ import {
   LOGIN_LOADED,
   UPDATE_ACCOUNT,
   UPDATE_ACCOUNT_FAIL,
+  CHANGE_PASSWORD,
   CHANGE_PASSWORD_FAIL
 } from '../actions/actionTypes';
 
@@ -29,6 +30,7 @@ export default function(state = initialState, action) {
         toLogin: true
       };
     case UPDATE_ACCOUNT:
+    case CHANGE_PASSWORD:
     case SIGNUP_FAIL:
     case UPDATE_ACCOUNT_FAIL:
     case CHANGE_PASSWORD_FAIL:
