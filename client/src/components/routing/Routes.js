@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import Alert from '../layout/Alert';
 import Home from '../layout/Home';
 import Signup from '../users/Signup';
 import Login from '../auth/Login';
@@ -15,17 +16,20 @@ import NotFound from '../layout/NotFound';
 class Routes extends Component {
   render() {
     return (
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/login" component={Login} />
-        <PrivateRoute exact path="/posts" component={Posts} />
-        <PrivateRoute exact path="/posts/:id" component={Post} />
-        <PrivateRoute exact path="/account" component={Account} />
-        <PrivateRoute exact path="/profile" component={Profile} />
-        <PrivateRoute exact path="/edit-profile" component={EditProfile} />
-        <Route component={NotFound} />
-      </Switch>
+      <Fragment>
+        <Alert />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/login" component={Login} />
+          <PrivateRoute exact path="/posts" component={Posts} />
+          <PrivateRoute exact path="/posts/:id" component={Post} />
+          <PrivateRoute exact path="/account" component={Account} />
+          <PrivateRoute exact path="/profile" component={Profile} />
+          <PrivateRoute exact path="/edit-profile" component={EditProfile} />
+          <Route component={NotFound} />
+        </Switch>
+      </Fragment>
     );
   }
 }

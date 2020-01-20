@@ -6,7 +6,6 @@ import store from './redux/store';
 import { loadUser } from './redux/actions/auth'
 
 import Navation from './components/layout/Navigation';
-import Alert from './components/layout/Alert';
 import Routes from './components/routing/Routes';
 
 class App extends Component {
@@ -20,7 +19,6 @@ class App extends Component {
         <BrowserRouter>
           <Navation />
           <div className="container mt-5">
-            <Alert />
             <Routes />
           </div>
         </BrowserRouter>

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { setSuccessAlert, setErrorAlert } from './alert';
-import { updateUser } from './auth';
+import { setAlert } from './alert';
+import { loadUser } from './auth';
 import {
   SIGNUP_SUCCESS,
   SIGNUP_FAIL,
@@ -17,11 +17,12 @@ export const signup = user => async dispatch => {
   axios.defaults.headers.common['Content-Type'] = 'application/json';
 
   try {
-    await axios.post('/api/users/signup', user);
+    const res = await axios.post('/api/users/signup', user);
+    dispatch(setAlert(res.data.success, 'success'));
     dispatch({ type: SIGNUP_SUCCESS });
   } catch (error) {
-    const messages = error.response.data.errors;
-    dispatch(setErrorAlert(messages));
+    const errors = error.response.data.errors;
+    errors.map(error => dispatch(setAlert(error.msg, 'danger')));
     dispatch({ type: SIGNUP_FAIL });
   }
 };
@@ -39,12 +40,12 @@ export const updateAccount = user => async dispatch => {
 
   try {
     const res = await axios.put('/api/users/update-account', user);
-    dispatch(setSuccessAlert(res.data));
-    dispatch(updateUser(res.data.userUpdated));
+    dispatch(setAlert(res.data.success, 'success'));
+    dispatch(loadUser());
     dispatch({ type: UPDATE_ACCOUNT });
   } catch (error) {
-    const messages = error.response.data.errors;
-    dispatch(setErrorAlert(messages));
+    const errors = error.response.data.errors;
+    errors.map(error => dispatch(setAlert(error.msg, 'danger')));
     dispatch({ type: UPDATE_ACCOUNT_FAIL });
   }
 };
@@ -61,7 +62,7 @@ export const changePassword = passwordData => async dispatch => {
     console.log(res);
   } catch (error) {
     const messages = error.response.data.errors;
-    dispatch(setErrorAlert(messages));
+    dispatch(setAlert(messages));
     dispatch({ type: CHANGE_PASSWORD_FAIL });
   }
 };

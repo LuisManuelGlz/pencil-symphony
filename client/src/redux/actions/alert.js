@@ -1,7 +1,8 @@
-import { SET_SUCCESS_ALERT, SET_ERROR_ALERT } from '../actions/actionTypes';
+import uuid from 'uuid';
+import { SET_ALERT, REMOVE_ALERT } from '../actions/actionTypes';
 
-export const setSuccessAlert = messages => dispatch =>
-  dispatch({ type: SET_SUCCESS_ALERT, payload: messages });
-
-export const setErrorAlert = messages => dispatch =>
-  dispatch({ type: SET_ERROR_ALERT, payload: messages });
+export const setAlert = (msg, typeAlert) => dispatch => {
+  const id = uuid.v4();
+  dispatch({ type: SET_ALERT, payload: { msg, typeAlert, id } });
+  setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), 5000);
+};

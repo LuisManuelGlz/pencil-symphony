@@ -1,13 +1,12 @@
 import axios from 'axios';
 
-import { setErrorAlert } from './alert';
+import { setAlert } from './alert';
 import {
   USER_LOADED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT,
-  UPDATE_USER
+  LOGOUT
 } from './actionTypes';
 
 // import setAuthToken from '../../utils/setAuthToken';
@@ -29,8 +28,6 @@ export const loadUser = () => async dispatch => {
     const res = await axios.get('/api/auth/test-auth');
     dispatch({ type: USER_LOADED, payload: res.data });
   } catch (error) {
-    const messages = error.response.data.errors;
-    dispatch(setErrorAlert(messages));
     dispatch({ type: AUTH_ERROR });
   }
 };
@@ -41,17 +38,14 @@ export const login = user => async dispatch => {
   try {
     const res = await axios.post('/api/auth/login', user);
     dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+    dispatch(loadUser());
   } catch (error) {
-    const messages = error.response.data.errors;
-    dispatch(setErrorAlert(messages));
+    const errors = error.response.data.errors;
+    errors.map(error => dispatch(setAlert(error.msg, 'danger')));
     dispatch({ type: LOGIN_FAIL });
   }
 };
 
 export const logout = () => dispatch => {
   dispatch({ type: LOGOUT });
-};
-
-export const updateUser = user => dispatch => {
-  dispatch({ type: UPDATE_USER, payload: user });
 };

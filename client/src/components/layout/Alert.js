@@ -11,26 +11,18 @@ class Alert extends Component {
           role="alert"
         >
           {this.props.success}
-          <button
-            type="button"
-            className="close"
-            data-dismiss="alert"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
       );
     }
 
-    return this.props.errors.map((error, index) => {
+    return this.props.alerts.map(alert => {
       return (
         <div
-          key={index}
-          className="alert alert-danger alert-dismissible fade show"
+          key={alert.id}
+          className={`alert alert-${alert.typeAlert} alert-dismissible fade show`}
           role="alert"
         >
-          {error.msg}
+          {alert.msg}
           <button
             type="button"
             className="close"
@@ -46,8 +38,7 @@ class Alert extends Component {
 }
 
 const mapStateToProps = state => ({
-  success: state.alert.success,
-  errors: state.alert.errors
+  alerts: state.alert
 });
 
 export default connect(mapStateToProps)(Alert);

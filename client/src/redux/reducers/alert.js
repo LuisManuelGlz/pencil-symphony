@@ -1,18 +1,15 @@
-import { SET_SUCCESS_ALERT, SET_ERROR_ALERT } from '../actions/actionTypes';
+import { SET_ALERT, REMOVE_ALERT } from '../actions/actionTypes';
 
-const initialState = {
-  success: '',
-  errors: []
-};
+const initialState = [];
 
 export default function(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case SET_SUCCESS_ALERT:
-      return { ...state, ...payload };
-    case SET_ERROR_ALERT:
-      return { ...state, errors: payload };
+    case SET_ALERT:
+      return [...state, payload];
+    case REMOVE_ALERT:
+      return state.filter(alert => alert.id !== payload);
     default:
       return state;
   }

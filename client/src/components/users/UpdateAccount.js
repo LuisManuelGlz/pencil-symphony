@@ -33,7 +33,7 @@ class UpdateAccount extends Component {
 
     await this.props.updateAccount(user);
 
-    if (this.props.success) {
+    if (this.props.success[0].typeAlert === 'success') {
       this.setState({
         updateAccountMode: false,
         newFirstName: '',
@@ -111,7 +111,7 @@ class UpdateAccount extends Component {
 }
 
 const mapStateToProps = state => ({
-  success: state.alert.success
+  success: state.alert
 });
 
 export default connect(mapStateToProps, { updateAccount })(UpdateAccount);
