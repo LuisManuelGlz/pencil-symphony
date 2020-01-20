@@ -22,7 +22,7 @@ class UpdateAccount extends Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit(e) {
+  handleSubmit = async (e) => {
     e.preventDefault();
 
     const user = {
@@ -31,15 +31,16 @@ class UpdateAccount extends Component {
       newEmail: this.state.newEmail
     };
 
-    this.props.updateAccount(user);
+    await this.props.updateAccount(user);
 
-    // if alert === 'success'
-    this.setState({
-      updateAccountMode: false,
-      newFirstName: '',
-      newLastName: '',
-      newEmail: ''
-    });
+    if (this.props.success) {
+      this.setState({
+        updateAccountMode: false,
+        newFirstName: '',
+        newLastName: '',
+        newEmail: ''
+      });
+    }
   }
 
   render() {
@@ -109,4 +110,8 @@ class UpdateAccount extends Component {
   }
 }
 
-export default connect(null, { updateAccount })(UpdateAccount);
+const mapStateToProps = state => ({
+  success: state.alert.success
+});
+
+export default connect(mapStateToProps, { updateAccount })(UpdateAccount);

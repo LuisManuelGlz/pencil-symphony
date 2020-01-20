@@ -1,5 +1,7 @@
-export const SET_ALERT = 'SET_ALERT';
-export const REMOVE_ALERT = 'REMOVE_ALERT';
+export const SET_SUCCESS_ALERT = 'SET_SUCCESS_ALERT';
+export const REMOVE_SUCCESS_ALERT = 'REMOVE_SUCCESS_ALERT';
+export const SET_ERROR_ALERT = 'SET_ERROR_ALERT';
+export const REMOVE_ERROR_ALERT = 'REMOVE_ERROR_ALERT';
 export const USER_LOADED = 'USER_LOADED';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
@@ -8,6 +10,7 @@ export const LOGIN_LOADED = 'LOGIN_LOADED';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
+export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_ACCOUNT = 'UPDATE_ACCOUNT';
 export const UPDATE_ACCOUNT_FAIL = 'UPDATE_ACCOUNT_FAIL';
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';

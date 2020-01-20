@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { setAlert } from './alert';
+import { setSuccessAlert, setErrorAlert } from './alert';
+import { updateUser } from './auth';
 import {
   SIGNUP_SUCCESS,
   SIGNUP_FAIL,
@@ -19,8 +20,8 @@ export const signup = user => async dispatch => {
     await axios.post('/api/users/signup', user);
     dispatch({ type: SIGNUP_SUCCESS });
   } catch (error) {
-    const messages = error.response.data;
-    dispatch(setAlert(messages));
+    const messages = error.response.data.errors;
+    dispatch(setErrorAlert(messages));
     dispatch({ type: SIGNUP_FAIL });
   }
 };
@@ -38,12 +39,12 @@ export const updateAccount = user => async dispatch => {
 
   try {
     const res = await axios.put('/api/users/update-account', user);
-    console.log(res);
+    dispatch(setSuccessAlert(res.data));
+    dispatch(updateUser(res.data.userUpdated));
+    dispatch({ type: UPDATE_ACCOUNT });
   } catch (error) {
-    const messages = error.response.data;
-    console.log(messages);
-    
-    dispatch(setAlert(messages));
+    const messages = error.response.data.errors;
+    dispatch(setErrorAlert(messages));
     dispatch({ type: UPDATE_ACCOUNT_FAIL });
   }
 };
@@ -59,8 +60,8 @@ export const changePassword = passwordData => async dispatch => {
     const res = await axios.put('/api/users/change-password', passwordData);
     console.log(res);
   } catch (error) {
-    const messages = error.response.data;
-    dispatch(setAlert(messages));
+    const messages = error.response.data.errors;
+    dispatch(setErrorAlert(messages));
     dispatch({ type: CHANGE_PASSWORD_FAIL });
   }
 };

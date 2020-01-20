@@ -28,6 +28,7 @@ export default function(state = initialState, action) {
         isLoading: false,
         toLogin: true
       };
+    case UPDATE_ACCOUNT:
     case SIGNUP_FAIL:
     case UPDATE_ACCOUNT_FAIL:
     case CHANGE_PASSWORD_FAIL:
