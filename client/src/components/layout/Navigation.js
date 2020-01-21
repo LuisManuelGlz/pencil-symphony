@@ -6,6 +6,21 @@ import { logout } from '../../redux/actions/auth';
 import { Link } from 'react-router-dom';
 
 class Navigation extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleCollapse = this.handleCollapse.bind(this);
+  }
+
+  handleCollapse() {
+    const navbarNav = document.querySelector('#navbarNav');
+
+    const navbarCollapsed = navbarNav.classList.contains('show');
+    if (navbarCollapsed) {
+      document.querySelector('.navbar-toggler').click();
+    }
+  }
+
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -17,15 +32,15 @@ class Navigation extends Component {
             className="navbar-toggler"
             type="button"
             data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className="collapse navbar-collapse" id="navbarNav">
             {!this.props.isLoading && this.props.isAuthenticated && (
               <form className="form-inline my-2 my-lg-0">
                 <input
@@ -48,7 +63,11 @@ class Navigation extends Component {
                 (this.props.isAuthenticated ? (
                   <Fragment>
                     <li className="nav-item">
-                      <Link to="/posts" className="nav-link">
+                      <Link
+                        to="/posts"
+                        className="nav-link"
+                        onClick={this.handleCollapse}
+                      >
                         Posts
                       </Link>
                     </li>
@@ -71,10 +90,18 @@ class Navigation extends Component {
                         className="dropdown-menu"
                         aria-labelledby="navbarDropdown"
                       >
-                        <Link to="/profile" className="dropdown-item">
+                        <Link
+                          to="/me/"
+                          className="dropdown-item"
+                          onClick={this.handleCollapse}
+                        >
                           Profile
                         </Link>
-                        <Link to="/account" className="dropdown-item">
+                        <Link
+                          to="/account"
+                          className="dropdown-item"
+                          onClick={this.handleCollapse}
+                        >
                           Account
                         </Link>
                         <div className="dropdown-divider"></div>

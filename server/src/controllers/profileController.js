@@ -29,25 +29,30 @@ ProfileController.myProfile = async (req, res) => {
 ProfileController.getProfile = async (req, res) => {
   const { id } = req.params;
 
+  if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+    return res.status(404).json({ msg: 'Profile not found' });
+  }
+
   try {
-    const profile = await Profile.findById(id).populate('user', [
+    const profile = await Profile.findOne({ user: id }).populate('user', [
       'firstName',
+      'lastName',
       'avatar'
     ]);
 
     if (!profile) {
-      return res.status(404).json({ errors: [{ msg: 'Post not found' }] });
+      return res.status(404).json({ errors: [{ msg: 'Profile not found' }] });
     }
 
     return res.status(200).json(profile);
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ errors: [{ msg: 'Profile not found' }] });
+    return res.status(500).json({ errors: [{ msg: 'Server error' }] });
   }
 };
 
 /**
- * @route PUT api/posts/edit/:id
+ * @route PUT api/profile/edit
  * @description Edit current profile by ID
  * @access private
  */
@@ -63,7 +68,12 @@ ProfileController.editProfile = async (req, res) => {
       { user: req.userId },
       { bio, website, location }
     );
-    return res.status(200).json('Your profile has been updated');
+    const profileUpdated = await Profile.findOne({
+      user: req.userId
+    }).populate('user', ['firstName', 'lastName']);
+    return res
+      .status(200)
+      .json({ success: 'Your profile has been updated', profileUpdated });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ errors: [{ msg: 'Server error' }] });

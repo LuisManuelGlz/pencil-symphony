@@ -6,7 +6,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 class PrivateRoute extends Component {
   render() {
-    const Component = this.props.component
+    const Component = this.props.component;
     return (
       <Route
         render={props =>

@@ -51,7 +51,6 @@ AuthController.login = async (req, res) => {
   if (!match) {
     return res.status(401).json({ errors: [{ msg: 'Incorrect password' }] });
   }
-console.log(user.email);
 
   const token = jwt.sign({ id: user._id, email: user.email }, secret, {
     expiresIn: 60 * 60 * 24

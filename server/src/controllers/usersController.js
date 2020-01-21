@@ -96,10 +96,8 @@ UsersController.updateAccount = async (req, res) => {
       lastName: newLastName,
       email: newEmail
     });
-    const userUpdated = await User.findById(id);
     return res.status(200).json({
-      success: 'Your account has been updated successfully',
-      userUpdated
+      success: 'Your account has been updated successfully'
     });
   } catch (error) {
     console.log(error);
