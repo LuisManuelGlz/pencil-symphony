@@ -8,6 +8,7 @@ const postsController = require('../controllers/postsController');
 
 router.get('/', isAuthenticated, postsController.getPosts);
 router.get('/:id', isAuthenticated, postsController.getPost);
+router.put('/like/:id', isAuthenticated, postsController.like)
 router.post(
   '/add',
   [isAuthenticated, [check('text', 'Please write something').notEmpty()]],

@@ -72,6 +72,39 @@ PostsController.addPost = async (req, res) => {
 };
 
 /**
+ * @route PUT api/posts/like/:id
+ * @description Like/unlike post
+ * @access private
+ */
+PostsController.like = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const post = await Post.findById(id);
+
+    if (
+      post.likes.filter(like => like.user.toString() === req.userId).length ===
+      0
+    ) {
+      post.likes.unshift({ user: req.userId });
+    } else {
+      const removeIndex = post.likes
+        .map(like => like.user.toString())
+        .indexOf(req.userId);
+
+      post.likes.splice(removeIndex, 1);
+    }
+
+    await post.save();
+
+    return res.status(200).json(post.likes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
+  }
+};
+
+/**
  * @route DELETE api/posts/delete/:id
  * @description Delete a post by ID
  * @access private
