@@ -82,6 +82,7 @@ class MyProfile extends Component {
                 style={{ visibility: this.state.editProfileMode && 'hidden' }}
                 onClick={() => this.setState({ editProfileMode: true })}
               >
+                <i className="fas fa-pen mr-1" />
                 Edit profile
               </button>
             </h5>

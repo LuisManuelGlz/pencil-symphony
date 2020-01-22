@@ -107,7 +107,10 @@ class Navigation extends Component {
                         <div className="dropdown-divider"></div>
                         <button
                           className="dropdown-item"
-                          onClick={this.props.logout}
+                          onClick={() => {
+                            this.props.logout();
+                            this.handleCollapse();
+                          }}
                         >
                           <i className="fa fa-sign-out-alt mr-1"></i>
                           Log Out
@@ -118,7 +121,11 @@ class Navigation extends Component {
                 ) : (
                   <Fragment>
                     <li className="nav-item">
-                      <Link to="/login" className="nav-link">
+                      <Link
+                        to="/login"
+                        className="nav-link"
+                        onClick={this.handleCollapse}
+                      >
                         Log In
                       </Link>
                     </li>
@@ -126,6 +133,7 @@ class Navigation extends Component {
                       <Link
                         to="/signup"
                         className="nav-link btn btn-primary btn-sm text-dark ml-2"
+                        onClick={this.handleCollapse}
                       >
                         Sign Up
                       </Link>

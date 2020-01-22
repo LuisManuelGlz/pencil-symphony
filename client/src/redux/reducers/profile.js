@@ -9,6 +9,7 @@ const initialState = {
   profile: {
     user: {}
   },
+  profileExist: null,
   isLoading: true
 };
 
@@ -17,6 +18,12 @@ export default function(state = initialState, action) {
 
   switch (type) {
     case GET_PROFILE:
+      return {
+        ...state,
+        profileExist: true,
+        profile: payload,
+        isLoading: false
+      };
     case UPDATE_PROFILE:
       return {
         ...state,
