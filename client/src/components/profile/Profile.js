@@ -43,24 +43,33 @@ class Profile extends Component {
                 )}
               </span>
 
-              <button className="badge badge-primary">Follow</button>
+              <button className="badge badge-primary">
+                <i className="fas fa-user-plus mr-1" />
+                {/* <i className="fas fa-user-minus" /> */}
+                Follow
+              </button>
             </h5>
-            <span className="text-muted mr-2">
-              {this.props.profile.location && this.props.profile.location}
-            </span>
-            <span className="text-muted">
-              {this.props.profile.website && this.props.profile.website}
-            </span>
-            <span className="text-muted">
-              {this.props.profile.creationDate && (
-                <Fragment>
-                  Joined{' '}
-                  <Moment format="MMMM YYYY">
-                    {moment.utc(this.props.profile.creationDate)}
-                  </Moment>
-                </Fragment>
-              )}
-            </span>
+            {this.props.profile.location && (
+              <span className="text-muted mr-3">
+                <i className="fas fa-thumbtack mr-1" />
+                {this.props.profile.location}
+              </span>
+            )}
+            {this.props.profile.website && (
+              <span className="text-muted mr-3">
+                <i className="fas fa-globe mr-1" />
+                {this.props.profile.website}
+              </span>
+            )}
+            {this.props.profile.creationDate && (
+              <span className="text-muted">
+                <i className="fas fa-calendar-alt mr-1" />
+                Joined{' '}
+                <Moment format="MMMM YYYY">
+                  {moment.utc(this.props.profile.creationDate)}
+                </Moment>
+              </span>
+            )}
             <br />
             {this.props.profile.bio && this.props.profile.bio}
           </div>

@@ -11,7 +11,9 @@ const PostsController = {};
  */
 PostsController.getPosts = async (req, res) => {
   try {
-    const posts = await Post.find({}).populate('user', ['firstName', 'avatar']);
+    const posts = await Post.find({})
+      .populate('user', ['firstName', 'avatar'])
+      .sort({ date: 'desc' });
     return res.status(200).json(posts);
   } catch (error) {
     console.log(error);

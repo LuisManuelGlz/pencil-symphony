@@ -17,7 +17,7 @@ export const signup = user => async dispatch => {
   axios.defaults.headers.common['Content-Type'] = 'application/json';
 
   try {
-    const res = await axios.post('/api/users/signup', user);
+    const res = await axios.post('/users/signup', user);
     dispatch(setAlert(res.data.success, 'success'));
     dispatch({ type: SIGNUP_SUCCESS });
   } catch (error) {
@@ -39,7 +39,7 @@ export const updateAccount = user => async dispatch => {
   }
 
   try {
-    const res = await axios.put('/api/users/update-account', user);
+    const res = await axios.put('/users/update-account', user);
     dispatch(setAlert(res.data.success, 'success'));
     dispatch(loadUser());
     dispatch({ type: UPDATE_ACCOUNT });
@@ -54,7 +54,7 @@ export const changePassword = passwordData => async dispatch => {
   axios.defaults.headers.common['Content-Type'] = 'application/json';
 
   try {
-    const res = await axios.put('/api/users/change-password', passwordData);
+    const res = await axios.put('/users/change-password', passwordData);
     dispatch(setAlert(res.data.success, 'success'));
     dispatch({ type: CHANGE_PASSWORD });
   } catch (error) {

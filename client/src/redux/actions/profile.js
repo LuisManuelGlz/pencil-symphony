@@ -12,7 +12,7 @@ import {
 
 export const getProfile = id => async dispatch => {
   try {
-    const profile = await axios.get(`/api/profile/${id}`);
+    const profile = await axios.get(`/profile/${id}`);
     dispatch({ type: GET_PROFILE, payload: profile.data });
   } catch (error) {
     const errors = error.response.data.errors;
@@ -25,7 +25,7 @@ export const updateProfile = profileData => async dispatch => {
   axios.defaults.headers.common['Content-Type'] = 'application/json';
 
   try {
-    const res = await axios.put(`/api/profile/edit`, profileData);
+    const res = await axios.put(`/profile/edit`, profileData);
     dispatch(setAlert(res.data.success, 'success'));
     dispatch({ type: UPDATE_PROFILE, payload: res.data.profileUpdated });
   } catch (error) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../redux/actions/auth';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
   constructor(props) {
@@ -33,10 +33,6 @@ class Login extends Component {
   }
 
   render() {
-    if (this.props.isAuthenticated) {
-      return <Redirect to="/posts" />
-    }
-
     return (
       <div className="d-flex justify-content-center">
         <form onSubmit={this.handleSubmit}>
@@ -72,8 +68,4 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
-});
-
-export default connect(mapStateToProps, { login })(Login);
+export default connect(null, { login })(Login);

@@ -43,10 +43,6 @@ class Signup extends Component {
       return <Redirect to="/login" />;
     }
 
-    if (this.props.isAuthenticated) {
-      return <Redirect to="/posts" />
-    }
-
     return (
       <div className="d-flex justify-content-center">
         <form onSubmit={this.handleSubmit}>
@@ -113,8 +109,7 @@ class Signup extends Component {
 }
 
 const mapStateToProps = state => ({
-  toLogin: state.users.toLogin,
-  isAuthenticated: state.auth.isAuthenticated
+  toLogin: state.users.toLogin
 });
 
 export default connect(mapStateToProps, { signup, cancelRedirect })(Signup);

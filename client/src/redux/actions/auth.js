@@ -25,7 +25,7 @@ export const loadUser = () => async dispatch => {
   // }
 
   try {
-    const res = await axios.get('/api/auth/test-auth');
+    const res = await axios.get('/auth/test-auth');
     dispatch({ type: USER_LOADED, payload: res.data });
   } catch (error) {
     dispatch({ type: AUTH_ERROR });
@@ -36,7 +36,7 @@ export const login = user => async dispatch => {
   axios.defaults.headers.common['Content-Type'] = 'application/json';
 
   try {
-    const res = await axios.post('/api/auth/login', user);
+    const res = await axios.post('/auth/login', user);
     dispatch({ type: LOGIN_SUCCESS, payload: res.data });
     dispatch(loadUser());
   } catch (error) {

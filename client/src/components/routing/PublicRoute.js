@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Route, Redirect } from 'react-router-dom';
 
-class PrivateRoute extends Component {
+class PublicRoute extends Component {
   render() {
     const Component = this.props.component;
     return (
@@ -13,9 +13,9 @@ class PrivateRoute extends Component {
           this.props.isLoading ? (
             <div>Loading...</div>
           ) : this.props.isAuthenticated ? (
-            <Component {...props} />
+            <Redirect to="/posts" />
           ) : (
-            <Redirect to="/login" />
+            <Component {...props} />
           )
         }
       />
@@ -28,4 +28,4 @@ const mapStateToProps = state => ({
   isLoading: state.auth.isLoading
 });
 
-export default connect(mapStateToProps)(PrivateRoute);
+export default connect(mapStateToProps)(PublicRoute);

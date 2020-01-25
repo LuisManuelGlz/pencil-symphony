@@ -89,6 +89,9 @@ class MyProfile extends Component {
             {this.state.editProfileMode ? (
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
+                  <label for="location" class="control-label">
+                    Location
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -99,6 +102,9 @@ class MyProfile extends Component {
                   />
                 </div>
                 <div className="form-group">
+                  <label for="website" class="control-label">
+                    Website
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -109,6 +115,9 @@ class MyProfile extends Component {
                   />
                 </div>
                 <div className="form-group">
+                  <label for="bio" class="control-label">
+                    Bio
+                  </label>
                   <textarea
                     className="form-control"
                     name="bio"
@@ -131,26 +140,27 @@ class MyProfile extends Component {
               </form>
             ) : (
               <Fragment>
-                <span className="text-muted">
-                  {this.props.profile.location && (
-                    <span className="mr-2">{this.props.profile.location}</span>
-                  )}
-                </span>
-                <span className="text-muted">
-                  {this.props.profile.website && (
-                    <span className="mr-2">{this.props.profile.website}</span>
-                  )}
-                </span>
-                <span className="text-muted">
-                  {this.props.profile.creationDate && (
-                    <Fragment>
-                      Joined{' '}
-                      <Moment format="MMMM YYYY">
-                        {moment.utc(this.props.profile.creationDate)}
-                      </Moment>
-                    </Fragment>
-                  )}
-                </span>
+                {this.props.profile.location && (
+                  <span className="text-muted mr-3">
+                    <i className="fas fa-thumbtack mr-1" />
+                    {this.props.profile.location}
+                  </span>
+                )}
+                {this.props.profile.website && (
+                  <span className="text-muted mr-3">
+                    <i className="fas fa-globe mr-1" />
+                    {this.props.profile.website}
+                  </span>
+                )}
+                {this.props.profile.creationDate && (
+                  <span className="text-muted">
+                    <i className="fas fa-calendar-alt mr-1" />
+                    Joined{' '}
+                    <Moment format="MMMM YYYY">
+                      {moment.utc(this.props.profile.creationDate)}
+                    </Moment>
+                  </span>
+                )}
                 <br />
                 {this.props.profile.bio && this.props.profile.bio}
               </Fragment>

@@ -13,6 +13,7 @@ import Post from '../posts/Post';
 import Account from '../users/Account';
 import MyProfile from '../profile/MyProfile';
 import Profile from '../profile/Profile';
+import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 import NotFound from '../layout/NotFound';
 
@@ -22,10 +23,9 @@ class Routes extends Component {
       <Fragment>
         <Alert />
         <Switch>
-          {/* {this.props.isLoading && <div>Loading...</div>} */}
-          <Route exact path="/" component={Home} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/login" component={Login} />
+          <PublicRoute exact path="/" component={Home} />
+          <PublicRoute exact path="/signup" component={Signup} />
+          <PublicRoute exact path="/login" component={Login} />
           <PrivateRoute exact path="/posts" component={Posts} />
           <PrivateRoute exact path="/posts/:id" component={Post} />
           <PrivateRoute exact path="/account" component={Account} />

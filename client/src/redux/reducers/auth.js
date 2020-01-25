@@ -30,8 +30,7 @@ export default function(state = initialState, action) {
         ...state,
         ...payload, // token: payload.token,
         isAuthenticated: true,
-        isLoading: false,
-        user: payload.user
+        isLoading: false
       };
     case LOGIN_FAIL:
     case AUTH_ERROR:
