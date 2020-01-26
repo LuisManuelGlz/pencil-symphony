@@ -1,12 +1,20 @@
 import React, { Fragment, useState, useEffect } from 'react';
 
 import { connect } from 'react-redux';
+import { clearAlerts } from '../../redux/actions/alert';
 import { getProfile, updateProfile } from '../../redux/actions/profile';
 
 import Moment from 'react-moment';
 import moment from 'moment';
 
-const MyProfile = ({ profile, user, alerts, getProfile, updateProfile }) => {
+const MyProfile = ({
+  clearAlerts,
+  profile: { isLoading, profile },
+  user,
+  alerts,
+  getProfile,
+  updateProfile
+}) => {
   const [editProfileMode, setEditProfileMode] = useState(false);
   const [formData, setFormData] = useState({
     location: '',
@@ -18,7 +26,9 @@ const MyProfile = ({ profile, user, alerts, getProfile, updateProfile }) => {
 
   useEffect(() => {
     getProfile(user._id);
-  }, [user._id]);
+  }, [getProfile, user._id]);
+
+  useEffect(() => () => clearAlerts(), []);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -47,6 +57,10 @@ const MyProfile = ({ profile, user, alerts, getProfile, updateProfile }) => {
     // }
   };
 
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div className="row">
       <div className="media">
@@ -58,11 +72,7 @@ const MyProfile = ({ profile, user, alerts, getProfile, updateProfile }) => {
         <div className="media-body">
           <h5 className="mt-0">
             <span className="mr-2">
-              {!profile.isLoading && (
-                <Fragment>
-                  {profile.user.firstName} {profile.user.lastName}
-                </Fragment>
-              )}
+              {profile.user.firstName} {profile.user.lastName}
             </span>
 
             <button
@@ -158,11 +168,11 @@ const MyProfile = ({ profile, user, alerts, getProfile, updateProfile }) => {
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile.profile,
+  profile: state.profile,
   user: state.auth.user,
   alerts: state.alert
 });
 
-export default connect(mapStateToProps, { getProfile, updateProfile })(
+export default connect(mapStateToProps, { clearAlerts, getProfile, updateProfile })(
   MyProfile
 );

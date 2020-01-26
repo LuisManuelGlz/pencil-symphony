@@ -9,14 +9,16 @@ import PostItem from './PostItem';
 const Posts = ({ post: { posts, isLoading }, isAuthenticated, getPosts }) => {
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [getPosts]);
 
-  return isLoading && posts === null ? (
-    <div>Loading...</div>
-  ) : (
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  return (
     <div>
       <PostForm />
-      {posts !== null &&
+      {posts.length > 0 &&
         posts.map(post => <PostItem key={post._id} post={post} />)}
     </div>
   );

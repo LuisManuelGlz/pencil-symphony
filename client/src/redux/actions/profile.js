@@ -5,7 +5,8 @@ import {
   GET_PROFILE,
   GET_PROFILE_FAIL,
   UPDATE_PROFILE,
-  UPDATE_PROFILE_FAIL
+  UPDATE_PROFILE_FAIL,
+  CLEAR_PROFILE
 } from './actionTypes';
 
 // import setAuthToken from '../../utils/setAuthToken';
@@ -33,4 +34,8 @@ export const updateProfile = profileData => async dispatch => {
     errors.map(error => dispatch(setAlert(error.msg, 'danger')));
     dispatch({ type: UPDATE_PROFILE_FAIL });
   }
+};
+
+export const clearProfile = () => dispatch => {
+  dispatch({ type: CLEAR_PROFILE });
 };

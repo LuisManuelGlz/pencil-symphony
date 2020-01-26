@@ -18,16 +18,11 @@ export default function(state = initialState, action) {
 
   switch (type) {
     case LOGIN_LOADED:
-      return {
-        ...state,
-        isLoading: false,
-        toLogin: false
-      };
     case SIGNUP_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        toLogin: true
+        toLogin: false
       };
     case UPDATE_ACCOUNT:
     case CHANGE_PASSWORD:

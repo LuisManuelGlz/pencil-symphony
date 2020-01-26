@@ -2,14 +2,12 @@ import {
   GET_PROFILE,
   GET_PROFILE_FAIL,
   UPDATE_PROFILE,
-  UPDATE_PROFILE_FAIL
+  UPDATE_PROFILE_FAIL,
+  CLEAR_PROFILE
 } from '../actions/actionTypes';
 
 const initialState = {
-  profile: {
-    user: {}
-  },
-  profileExist: null,
+  profile: null,
   isLoading: true
 };
 
@@ -18,12 +16,6 @@ export default function(state = initialState, action) {
 
   switch (type) {
     case GET_PROFILE:
-      return {
-        ...state,
-        profileExist: true,
-        profile: payload,
-        isLoading: false
-      };
     case UPDATE_PROFILE:
       return {
         ...state,
@@ -36,6 +28,12 @@ export default function(state = initialState, action) {
         ...state,
         isLoading: false
       };
+    case CLEAR_PROFILE:
+      return {
+        ...state,
+        profile: null,
+        isLoading: false
+      }
     default:
       return state;
   }

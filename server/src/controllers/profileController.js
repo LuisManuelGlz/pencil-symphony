@@ -3,25 +3,6 @@ const Profile = require('../models/Profile');
 const ProfileController = {};
 
 /**
- * @route GET api/profile/me
- * @description Get current profile
- * @access private
- */
-ProfileController.myProfile = async (req, res) => {
-  try {
-    const profile = await Profile.findOne({ user: req.userId }).populate(
-      'user',
-      ['firstName', 'avatar']
-    );
-
-    return res.status(200).json(profile);
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ errors: [{ msg: 'Server error' }] });
-  }
-};
-
-/**
  * @route GET api/profile/:id
  * @description Get a profile by ID
  * @access private

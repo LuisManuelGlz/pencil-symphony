@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { clearAlerts } from '../../redux/actions/alert';
 import { connect } from 'react-redux';
 import { signup, cancelRedirect } from '../../redux/actions/users';
+
 import { Link, Redirect } from 'react-router-dom';
 
-const Signup = ({ signup, cancelRedirect, toLogin }) => {
+const Signup = ({ clearAlerts, signup, cancelRedirect, toLogin }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -13,6 +16,8 @@ const Signup = ({ signup, cancelRedirect, toLogin }) => {
   });
 
   const { firstName, lastName, email, password, password2 } = formData;
+
+  useEffect(() => () => clearAlerts(), []);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -104,4 +109,4 @@ const mapStateToProps = state => ({
   toLogin: state.users.toLogin
 });
 
-export default connect(mapStateToProps, { signup, cancelRedirect })(Signup);
+export default connect(mapStateToProps, { clearAlerts, signup, cancelRedirect })(Signup);

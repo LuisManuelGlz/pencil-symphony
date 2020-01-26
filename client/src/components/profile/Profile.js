@@ -9,18 +9,18 @@ import Moment from 'react-moment';
 import moment from 'moment';
 
 const Profile = ({
-  profile: { isLoading, profile, profileExist },
+  profile: { isLoading, profile },
   user,
   getProfile,
   location
 }) => {
   useEffect(() => {
     getProfile(location.pathname.split('/')[2]);
-  }, []);
+  }, [getProfile]);
 
   if (isLoading) {
     return <div>Loading...</div>;
-  } else if (!isLoading && !profileExist) {
+  } else if (!isLoading && profile === null) {
     return <Redirect to="/not-found" />;
   }
 

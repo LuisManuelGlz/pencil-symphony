@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { connect } from 'react-redux';
+import { clearAlerts } from '../../redux/actions/alert'
 import { changePassword } from '../../redux/actions/users';
 
-const ChangePassword = ({ changePassword }) => {
+const ChangePassword = ({ clearAlerts, changePassword }) => {
   const [formData, setFormData] = useState({
     oldPassword: '',
     newPassword: '',
@@ -11,6 +12,8 @@ const ChangePassword = ({ changePassword }) => {
   });
 
   const { oldPassword, newPassword, newPassword2 } = formData;
+
+  useEffect(() => () => clearAlerts(), []);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -80,4 +83,4 @@ const ChangePassword = ({ changePassword }) => {
   );
 };
 
-export default connect(null, { changePassword })(ChangePassword);
+export default connect(null, { clearAlerts, changePassword })(ChangePassword);

@@ -1,7 +1,7 @@
 import { GET_POSTS, GET_POSTS_FAIL } from '../actions/actionTypes';
 
 const initialState = {
-  posts: null,
+  posts: [],
   isLoading: true
 };
 

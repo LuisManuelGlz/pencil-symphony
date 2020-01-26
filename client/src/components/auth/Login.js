@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { clearAlerts } from '../../redux/actions/alert';
 import { connect } from 'react-redux';
 import { login } from '../../redux/actions/auth';
+
 import { Link } from 'react-router-dom';
 
-const Login = ({ login }) => {
+const Login = ({ clearAlerts, login }) => {
   const [formData, setFormData] = useState({ email: '', password: '' });
 
   const { email, password } = formData;
+
+  useEffect(() => () => clearAlerts(), []);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -59,4 +64,4 @@ const Login = ({ login }) => {
   );
 };
 
-export default connect(null, { login })(Login);
+export default connect(null, { clearAlerts, login })(Login);
