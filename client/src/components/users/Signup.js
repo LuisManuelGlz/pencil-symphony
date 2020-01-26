@@ -17,7 +17,7 @@ const Signup = ({ clearAlerts, signup, cancelRedirect, toLogin }) => {
 
   const { firstName, lastName, email, password, password2 } = formData;
 
-  useEffect(() => () => clearAlerts(), []);
+  useEffect(() => () => clearAlerts(), [clearAlerts]);
 
   const handleChange = e => {
     const { name, value } = e.target;

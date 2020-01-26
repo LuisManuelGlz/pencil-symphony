@@ -2,18 +2,22 @@ import React, { Fragment, useState, useEffect } from 'react';
 
 import { connect } from 'react-redux';
 import { clearAlerts } from '../../redux/actions/alert';
-import { getProfile, updateProfile } from '../../redux/actions/profile';
+import {
+  getProfile,
+  updateProfile,
+  changeUpdateProfileMode
+} from '../../redux/actions/profile';
 
 import Moment from 'react-moment';
 import moment from 'moment';
 
 const MyProfile = ({
   clearAlerts,
-  profile: { isLoading, profile },
+  profile: { isLoading, profile, isProfileUpdatedSuccessfully },
   user,
-  alerts,
   getProfile,
-  updateProfile
+  updateProfile,
+  changeUpdateProfileMode
 }) => {
   const [editProfileMode, setEditProfileMode] = useState(false);
   const [formData, setFormData] = useState({
@@ -28,7 +32,7 @@ const MyProfile = ({
     getProfile(user._id);
   }, [getProfile, user._id]);
 
-  useEffect(() => () => clearAlerts(), []);
+  useEffect(() => () => clearAlerts(), [clearAlerts]);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -47,18 +51,14 @@ const MyProfile = ({
 
     await updateProfile(profileData);
 
-    // if (this.props.success[0].typeAlert === 'success') {
-    //   this.setState({
-    //     editProfileMode: false,
-    //     location: this.props.profile.location,
-    //     website: this.props.profile.website,
-    //     bio: this.props.profile.bio
-    //   });
-    // }
+    if (isProfileUpdatedSuccessfully) {
+      changeUpdateProfileMode();
+      setEditProfileMode(false);
+    }
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>
+  if (isLoading || profile === null) {
+    return <div>Loading...</div>;
   }
 
   return (
@@ -173,6 +173,9 @@ const mapStateToProps = state => ({
   alerts: state.alert
 });
 
-export default connect(mapStateToProps, { clearAlerts, getProfile, updateProfile })(
-  MyProfile
-);
+export default connect(mapStateToProps, {
+  clearAlerts,
+  getProfile,
+  updateProfile,
+  changeUpdateProfileMode
+})(MyProfile);

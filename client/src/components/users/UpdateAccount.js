@@ -14,12 +14,7 @@ const UpdateAccount = ({ alerts, clearAlerts, updateAccount }) => {
 
   const { newFirstName, newLastName, newEmail } = formData;
 
-  useEffect(() => () => {
-    console.log(alerts.length);
-    if (alerts.length > 0) {
-      clearAlerts()
-    }
-  }, []);
+  useEffect(() => () => clearAlerts(), [clearAlerts]);
 
   const handleChange = e => {
     const { name, value } = e.target;

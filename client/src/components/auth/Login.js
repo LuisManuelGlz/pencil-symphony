@@ -11,7 +11,7 @@ const Login = ({ clearAlerts, login }) => {
 
   const { email, password } = formData;
 
-  useEffect(() => () => clearAlerts(), []);
+  useEffect(() => () => clearAlerts(), [clearAlerts]);
 
   const handleChange = e => {
     const { name, value } = e.target;

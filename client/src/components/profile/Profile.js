@@ -16,7 +16,7 @@ const Profile = ({
 }) => {
   useEffect(() => {
     getProfile(location.pathname.split('/')[2]);
-  }, [getProfile]);
+  }, [getProfile, location.pathname]);
 
   if (isLoading) {
     return <div>Loading...</div>;

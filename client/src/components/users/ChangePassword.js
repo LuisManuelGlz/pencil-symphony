@@ -13,7 +13,7 @@ const ChangePassword = ({ clearAlerts, changePassword }) => {
 
   const { oldPassword, newPassword, newPassword2 } = formData;
 
-  useEffect(() => () => clearAlerts(), []);
+  useEffect(() => () => clearAlerts(), [clearAlerts]);
 
   const handleChange = e => {
     const { name, value } = e.target;
