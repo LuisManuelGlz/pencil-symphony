@@ -1,6 +1,4 @@
-import React, { Component, Fragment } from 'react';
-
-import { connect } from 'react-redux';
+import React, { Fragment } from 'react';
 
 import { Switch, Route } from 'react-router-dom';
 
@@ -17,29 +15,23 @@ import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 import NotFound from '../layout/NotFound';
 
-class Routes extends Component {
-  render() {
-    return (
-      <Fragment>
-        <Alert />
-        <Switch>
-          <PublicRoute exact path="/" component={Home} />
-          <PublicRoute exact path="/signup" component={Signup} />
-          <PublicRoute exact path="/login" component={Login} />
-          <PrivateRoute exact path="/posts" component={Posts} />
-          <PrivateRoute exact path="/posts/:id" component={Post} />
-          <PrivateRoute exact path="/account" component={Account} />
-          <PrivateRoute exact path="/me" component={MyProfile} />
-          <PrivateRoute exact path="/profile/:id" component={Profile} />
-          <Route component={NotFound} />
-        </Switch>
-      </Fragment>
-    );
-  }
-}
+const Routes = () => {
+  return (
+    <Fragment>
+      <Alert />
+      <Switch>
+        <PublicRoute exact path="/" component={Home} />
+        <PublicRoute exact path="/signup" component={Signup} />
+        <PublicRoute exact path="/login" component={Login} />
+        <PrivateRoute exact path="/posts" component={Posts} />
+        <PrivateRoute exact path="/posts/:id" component={Post} />
+        <PrivateRoute exact path="/account" component={Account} />
+        <PrivateRoute exact path="/me" component={MyProfile} />
+        <PrivateRoute exact path="/profile/:id" component={Profile} />
+        <Route component={NotFound} />
+      </Switch>
+    </Fragment>
+  );
+};
 
-const mapStateToProps = state => ({
-  isLoading: state.auth.isLoading
-});
-
-export default connect(mapStateToProps)(Routes);
+export default Routes;

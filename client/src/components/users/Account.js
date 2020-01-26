@@ -1,19 +1,12 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import UpdateAcount from './UpdateAccount';
 import ChangePassword from './ChangePassword';
 
-class Account extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selected: 'account settings'
-    };
+const Account = () => {
+  const [selected, setSelected] = useState('account settings');
 
-    this.getComponent = this.getComponent.bind(this);
-  }
-
-  getComponent(selected) {
+  const getComponent = selected => {
     switch (selected) {
       case 'account settings':
         return <UpdateAcount />;
@@ -22,33 +15,29 @@ class Account extends Component {
       default:
         return;
     }
-  }
+  };
 
-  render() {
-    return (
-      <div className="row">
-        <div className="col-3">
-          <div className="list-group">
-            <button
-              className={`list-group-item list-group-item-action ${this.state
-                .selected === 'account settings' && 'active'}`}
-              onClick={() => this.setState({ selected: 'account settings' })}
-            >
-              Account settings
-            </button>
-            <button
-              className={`list-group-item list-group-item-action ${this.state
-                .selected === 'change password' && 'active'}`}
-              onClick={() => this.setState({ selected: 'change password' })}
-            >
-              Change password
-            </button>
-          </div>
+  return (
+    <div className="row">
+      <div className="col-3">
+        <div className="list-group">
+          <button
+            className={`list-group-item list-group-item-action ${selected === 'account settings' && 'active'}`}
+            onClick={() => setSelected('account settings')}
+          >
+            Account settings
+          </button>
+          <button
+            className={`list-group-item list-group-item-action ${selected === 'change password' && 'active'}`}
+            onClick={() => setSelected('change password')}
+          >
+            Change password
+          </button>
         </div>
-        <div className="col-6">{this.getComponent(this.state.selected)}</div>
       </div>
-    );
-  }
-}
+      <div className="col-6">{getComponent(selected)}</div>
+    </div>
+  );
+};
 
 export default Account;

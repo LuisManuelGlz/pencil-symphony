@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 
 import { connect } from 'react-redux';
 import { getPosts } from '../../redux/actions/post';
@@ -6,27 +6,24 @@ import { getPosts } from '../../redux/actions/post';
 import PostForm from './PostForm';
 import PostItem from './PostItem';
 
-class Posts extends Component {
-  componentDidMount() {
-    this.props.getPosts();
-  };
+const Posts = ({ post: { posts, isLoading }, isAuthenticated, getPosts }) => {
+  useEffect(() => {
+    getPosts();
+  }, []);
 
-  render() {
-    return this.props.isLoading && this.props.posts === null ? (
-      <div>Loading...</div>
-    ) : (
-      <div>
-        <PostForm />
-        {this.props.posts !== null &&
-          this.props.posts.map(post => <PostItem key={post._id} post={post} />)}
-      </div>
-    );
-  }
-}
+  return isLoading && posts === null ? (
+    <div>Loading...</div>
+  ) : (
+    <div>
+      <PostForm />
+      {posts !== null &&
+        posts.map(post => <PostItem key={post._id} post={post} />)}
+    </div>
+  );
+};
 
 const mapStateToProps = state => ({
-  posts: state.post.posts,
-  isLoading: state.post.isLoading,
+  post: state.post,
   isAuthenticated: state.auth.isAuthenticated
 });
 

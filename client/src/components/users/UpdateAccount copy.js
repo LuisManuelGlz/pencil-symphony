@@ -3,15 +3,15 @@ import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { updateAccount } from '../../redux/actions/users';
 
-const UpdateAccount = ({ alerts, updateAccount }) => {
-  const [updateAccountMode, setUpdateAccountMode] = useState(false);
+const UpdateAccount = ({ success, updateAccount }) => {
   const [formData, setFormData] = useState({
+    updateAccountMode: false,
     newFirstName: '',
     newLastName: '',
     newEmail: ''
   });
 
-  const { newFirstName, newLastName, newEmail } = formData;
+  const { updateAccountMode, newFirstName, newLastName, newEmail } = formData;
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -29,14 +29,14 @@ const UpdateAccount = ({ alerts, updateAccount }) => {
 
     await updateAccount(user);
 
-    // if (alerts[0].typeAlert === 'success') {
-    //   setFormData({
-    //     updateAccountMode: false,
-    //     newFirstName: '',
-    //     newLastName: '',
-    //     newEmail: ''
-    //   });
-    // }
+    if (success[0].typeAlert === 'success') {
+      setFormData({
+        updateAccountMode: false,
+        newFirstName: '',
+        newLastName: '',
+        newEmail: ''
+      });
+    }
   };
 
   return (
@@ -84,7 +84,7 @@ const UpdateAccount = ({ alerts, updateAccount }) => {
             <button
               className="btn"
               onClick={() =>
-                setUpdateAccountMode(false)
+                setFormData({ ...formData, updateAccountMode: false })
               }
             >
               Cancel
@@ -97,7 +97,7 @@ const UpdateAccount = ({ alerts, updateAccount }) => {
           <button
             className="btn btn-primary"
             onClick={() =>
-              setUpdateAccountMode(true)
+              setFormData({ ...formData, updateAccountMode: true })
             }
           >
             Update account
@@ -109,7 +109,7 @@ const UpdateAccount = ({ alerts, updateAccount }) => {
 };
 
 const mapStateToProps = state => ({
-  alerts: state.alert
+  success: state.alert
 });
 
 export default connect(mapStateToProps, { updateAccount })(UpdateAccount);

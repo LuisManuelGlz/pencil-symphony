@@ -1,17 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { connect } from 'react-redux';
+const Home = () => {
+  return (
+    <div className="text-center">
+      <h2>Welcome to Pencil Symphony</h2>
+      <Link to='/login' className="btn">Log In</Link>
+    </div>
+  );
+};
 
-class Home extends Component {
-  render() {
-    return (
-      <div className="text-center">
-        <h2>Welcome to Pencil Symphony</h2>
-        <Link to='/login' className="btn">Log In</Link>
-      </div>
-    );
-  }
-}
-
-export default connect(null)(Home);
+export default Home;

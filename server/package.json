@@ -6,8 +6,10 @@
   "scripts": {
     "start": "node src",
     "server": "nodemon src",
-    "client": "BROWSER=none npm start --prefix ../client",
-    "dev": "concurrently 'npm run server' 'npm run client'"
+    "client": "npm start --prefix ../client",
+    "client-bn": "BROWSER=none npm start --prefix ../client",
+    "dev": "concurrently 'npm run server' 'npm run client'",
+    "dev-bn": "concurrently 'npm run server' 'npm run client-bn'"
   },
   "keywords": [],
   "author": "",
