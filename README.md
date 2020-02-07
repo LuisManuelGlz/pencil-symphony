@@ -35,3 +35,5 @@ Este comando ejecuta la aplicación del backend (solo la API) y además el servi
 ### `npm run dev`
 
 Este comando ejecuta toda la aplicación tanto el backend como el frontend de forma simultánea.
+
+**Nota: para ejecutar este comando es necesario tener instalado `nodemon`<br />Basta con ejecutar `npm install nodemon -D`.**
